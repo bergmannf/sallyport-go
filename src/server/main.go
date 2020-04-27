@@ -56,7 +56,7 @@ func serverSideEventsConnection(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	for {
 		request := <- clientQueue.NotificationChannel()
-		w.Write([]byte(request.json()))
+		fmt.Fprintf(w, "data: %s\n\n", request.json())
 		flusher.Flush()
 	}
 }

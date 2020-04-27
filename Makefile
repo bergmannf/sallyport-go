@@ -2,12 +2,16 @@ GO="go"
 
 all: server client
 
-clean:
-	rm -f ./client
-	rm -f ./server
+clean: clean-server clean-client
 
-client: clean
+clean-server:
+	rm -rf ./server
+
+clean-client:
+	rm -rf ./client
+
+client: clean-client
 	${GO} build ./src/client
 
-server: clean
+server: clean-server
 	${GO} build ./src/server
